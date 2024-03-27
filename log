@@ -116,3 +116,14 @@ list.c:55:22: error: statement with no effect [-Werror=unused-value]
 cc1: all warnings being treated as errors
 Compilation failed
 3badc19
+Wed 27 Mar 2024 07:04:10 PM UTC: 
+ list.c | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
+In file included from test.c:5:
+list.c: In function ‘lastList’:
+list.c:55:22: error: statement with no effect [-Werror=unused-value]
+   55 |   list->current->next->next;
+      |   ~~~~~~~~~~~~~~~~~~~^~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+9d43f7b
