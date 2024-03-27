@@ -76,3 +76,32 @@ list.c:55:22: error: statement with no effect [-Werror=unused-value]
 cc1: all warnings being treated as errors
 Compilation failed
 b7d25de
+Wed 27 Mar 2024 06:47:08 PM UTC: 
+ list.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+In file included from test.c:5:
+list.c: In function ‘lastList’:
+list.c:55:22: error: statement with no effect [-Werror=unused-value]
+   55 |   list->current->next->next;
+      |   ~~~~~~~~~~~~~~~~~~~^~~~~~
+list.c: In function ‘popCurrent’:
+list.c:117:9: error: unused variable ‘data’ [-Werror=unused-variable]
+  117 |   void *data = list->current->data;
+      |         ^~~~
+list.c: At top level:
+list.c:120:5: error: expected identifier or ‘(’ before ‘else’
+  120 |   } else{
+      |     ^~~~
+list.c:124:3: error: expected identifier or ‘(’ before ‘return’
+  124 |   return (void*)data;
+      |   ^~~~~~
+list.c:125:1: error: expected identifier or ‘(’ before ‘}’ token
+  125 | }
+      | ^
+list.c: In function ‘popCurrent’:
+list.c:120:3: error: control reaches end of non-void function [-Werror=return-type]
+  120 |   } else{
+      |   ^
+cc1: all warnings being treated as errors
+Compilation failed
+160a7d9
