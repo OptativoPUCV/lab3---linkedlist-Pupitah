@@ -52,7 +52,6 @@ void * nextList(List * list) {
 void * lastList(List * list) {
   if (list==NULL || list->tail ==NULL) return NULL;    //Condición lista vacía.
   list->current = list->tail;
-  list->current->next->next;
   return (void *) list->current->data;
 }
 

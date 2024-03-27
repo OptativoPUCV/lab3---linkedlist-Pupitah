@@ -127,3 +127,9 @@ list.c:55:22: error: statement with no effect [-Werror=unused-value]
 cc1: all warnings being treated as errors
 Compilation failed
 9d43f7b
+Wed 27 Mar 2024 07:04:51 PM UTC: 
+ list.c | 1 -
+ 1 file changed, 1 deletion(-)
+ tests:  12|0
+total_score: 70/70
+31c084d
