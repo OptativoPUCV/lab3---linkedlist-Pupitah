@@ -52,3 +52,16 @@ list.c:54:29: error: expected ‘;’ before ‘list’
       |   ~~~~                       
 Compilation failed
 b2efd1e
+Wed 27 Mar 2024 06:43:51 PM UTC: 
+ list.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+In file included from test.c:5:
+list.c: In function ‘lastList’:
+list.c:54:29: error: expected ‘;’ before ‘list’
+   54 |   list->current = list->tail
+      |                             ^
+      |                             ;
+   55 |   list->current->next->next;
+      |   ~~~~                       
+Compilation failed
+a2d0326

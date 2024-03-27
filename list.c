@@ -51,15 +51,19 @@ void * nextList(List * list) {
 
 void * lastList(List * list) {
   if (list==NULL || list->tail ==NULL) return NULL;    //Condición lista vacía.
-  list->current = list->tail    //Sino se asigna el dato del último nodo al current para después retornarlo. 
+  list->current = list->tail
   list->current->next->next;
   return (void *) list->current->data;
 }
 
 void * prevList(List * list) {
-  if (list == NULL || list->current==NULL || list->current->prev == NULL) return NULL;    //Condición lista vacía.
-  list->current = list->current->prev;    //Sino se asigna el dato previo al current.
-  return (void *) list->current->data;    //Se retorna el dato.
+  if (list==NULL || list->current == NULL || list->current->prev == NULL){
+    return NULL;
+  }
+  list->current = list->current->prev;
+  return (void *) list->current->data;
+  
+  
 }
 
 void pushFront(List * list, void * data) {
