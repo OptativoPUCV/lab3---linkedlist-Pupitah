@@ -114,7 +114,7 @@ void * popBack(List * list) {
 void * popCurrent(List * list) {
   if (list->current == NULL) return NULL;
   void * data = list->current->data;
-  Node *nodeToRemove = list->current;;
+  Node *nodeToRemove = list->current;
   if (list->current->prev != NULL){
     list->current->prev->next = list->current->next;
   } else{
