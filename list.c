@@ -29,45 +29,79 @@ Node * createNode(void * data) {
 }
 
 List * createList() {
-  List *lista = (List *)malloc(sizeof(List));
-  lista->head=NULL;
-  lista->tail=NULL;
+  List *lista = (List *)malloc(sizeof(List));    //Asignación de memoria para la lista.
+  lista->head=NULL;                    
+  lista->tail=NULL;                  //Se asignan las variables del struct lista head, tail, current.
   lista->current=NULL;
 
   return lista;
 }
 
 void * firstList(List * list) {
-  
-    return NULL;
+  if (list==NULL || list->head==NULL) return NULL;    //Condición por si la lista está vacía, en ese caso retorna NULL.
+  list->current = list->head;        //Reemplazamos el current con el primero de la lista.
+  return(void *)list->current->data;  //Retorna el dato(key) del primer nodo. 
 }
 
 void * nextList(List * list) {
-    return NULL;
+  if (list==NULL || list->current == NULL || list->current->next == NULL) return NULL;    //Condición por si la lista está vacía o ya está seleccionado el último nodo.
+  list->current = list->current->next;    //Sino, se asigna el siguiente valor al current.
+  return (void *) list->current->data;  //Y se retorna el dato.
 }
 
 void * lastList(List * list) {
-    return NULL;
+  if (list==NULL || list->tail ==NULL) return NULL;    //Condición lista vacía.
+  list->current = list->tail->data;    //Sino se asigna el dato del último nodo al current para después retornarlo. 
+  return (void *) list->current->data;
 }
 
 void * prevList(List * list) {
-    return NULL;
+  if (list == NULL || list->current==NULL || list->current->prev == NULL) return NULL;    //Condición lista vacía.
+  list->current = list->current->prev;    //Sino se asigna el dato previo al current.
+  return (void *) list->current->data;    //Se retorna el dato.
 }
 
 void pushFront(List * list, void * data) {
+  Node * newNode = createNode(data);      //Se crea un nuevo nodo vacío con la función createNode.
+  if (list->head == NULL)    //Condición por si la lista está vacía.
+  {
+    list->head = newNode;    //En ese caso al ser el único valor(nodo) se le asigna la primera y última posición (head y tail).
+    list->tail = newNode;
+  } else{
+    newNode->next = list->head;  //Sino se le asigna al puntero next del nuevo nodo al nodo head
+    list->head->prev = newNode;  //y al head el puntero prev al nuevo nodo.
+    list->head = newNode;      //Finalmente se reemplaza el head con el nuevo nodo.
+  }
 }
 
 void pushBack(List * list, void * data) {
-    list->current = list->tail;
-    pushCurrent(list,data);
+  list->current = list->tail;            //Se reemplaza el current por la cola de la lista.
+  pushCurrent(list,data);        //Se usa la función pushCurrent para reemplazar el último nodo.
 }
 
 void pushCurrent(List * list, void * data) {
+  Node *newNode = createNode(data);    //Se crea un nuevo nodo.
+  if (list->current == NULL){        //Condición lista vacía.
+    list->head = newNode;        
+    list->tail = newNode;          //Si se cumple la condición, se les asigna todas las variables al nuevo nodo.
+    list->current = newNode;
+  } else{                            //Sino, al prev y next del nuevo nodo se les reemplaza con los punteros del nodo current.
+    newNode->prev = list->current;
+    newNode->next = list->current->next;
+  }
+
+  if(list->current->next != NULL){
+    list->current->next->prev = newNode;
+  } else{
+    list->tail = newNode;
+  }
+  list->current->next = newNode;
+  list->current = newNode;
 }
 
 void * popFront(List * list) {
-    list->current = list->head;
-    return popCurrent(list);
+  list->current = list->head;
+  return popCurrent(list);
 }
 
 void * popBack(List * list) {
@@ -76,7 +110,18 @@ void * popBack(List * list) {
 }
 
 void * popCurrent(List * list) {
-    return NULL;
+  if(list->current == NULL) return NULL;
+  void *data = list->current->data;
+
+  if(list->current == list->tail) free(list->current);
+  if(list->current == list->head){
+    list->head = list->current->next;
+    free(list->current);
+  } else{
+    list->current->prev->next = list->current->next;
+    list->current->next->prev = list->current->prev;
+  }
+  return data;
 }
 
 void cleanList(List * list) {
